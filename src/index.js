@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+// import App from './App';
 import reportWebVitals from "./reportWebVitals";
 
+// uncomment this code
 import Hello from "./routes/hello";
 import Home from "./routes/home";
 import ContactManager from "./routes/contacts";
@@ -13,6 +15,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
+
+  // uncomment this code to create routing to hello page
   {
     path: "/hello",
     element: <Hello />,

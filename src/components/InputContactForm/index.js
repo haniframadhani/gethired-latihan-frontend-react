@@ -1,12 +1,35 @@
 import { useState } from "react";
+
+// TODO: Uncomment baris kode di bawah untuk meng-import fungsi addNewContact dari services/index.js
+import { addNewContact } from "../../services";
+
 import "./style.css";
 
-const InputContactForm = () => {
+const InputContactForm = (props) => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = () => {};
+  // TODO: Uncomment baris kode di bawah untuk mendapatkan fungsi handleGetContacts dari props
+  const { handleGetContacts } = props;
+
+  const resetInputValue = () => {
+    setFullName("");
+    setPhoneNumber("");
+    setEmail("");
+  };
+
+  // TODO: Uncomment baris kode di bawah untuk memanggil fungsi mengirim data kontak baru yang sudah diimport sebelumnya dari services/index.js lalu panggil fungsi untuk mengambil semua data kontak dari api dan mereset value yang ada di setiap input field
+  const handleSubmit = async () => {
+    await addNewContact({
+      full_name: fullName,
+      phone_number: phoneNumber,
+      email,
+    });
+
+    handleGetContacts();
+    resetInputValue();
+  };
 
   const allowSubmit = !(!fullName || !phoneNumber || !email);
 
@@ -47,11 +70,7 @@ const InputContactForm = () => {
             placeholder="Masukkan Email"
           />
         </div>
-        <button
-          disabled={!allowSubmit}
-          data-cy="btn-submit"
-          onClick={handleSubmit}
-        >
+        <button disabled={!allowSubmit} data-cy="btn-submit" onClick={handleSubmit}>
           Simpan
         </button>
       </div>

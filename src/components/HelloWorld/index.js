@@ -1,4 +1,3 @@
-// Uncomment this line
 import { Link } from "react-router-dom";
 import devcodeLogo from "../../assets/devcode-logo.png";
 import "./style.css";
