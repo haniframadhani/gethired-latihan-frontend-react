@@ -10,7 +10,7 @@ const WelcomeCard = () => {
         perubahan yang kamu lakukan.
       </h2>
       <div data-cy="router-button">
-        <Link to={`/hello`} className="router-button">
+        <Link to={`/hello`} className="router__btn">
           Lihat hasil
         </Link>
       </div>

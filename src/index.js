@@ -4,20 +4,22 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-// TODO: Uncomment baris kode dibawah ini untuk meng-import Halaman Hello ke dalam router
 import Hello from "./routes/hello";
 import Home from "./routes/home";
+import ContactManager from "./routes/contacts";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
   },
-
-  // TODO: Uncomment baris kode dibawah ini untuk menambahkan routing baru ke Halaman Hello
   {
     path: "/hello",
     element: <Hello />,
+  },
+  {
+    path: "/contacts",
+    element: <ContactManager />,
   },
 ]);
 
