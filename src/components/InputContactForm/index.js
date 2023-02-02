@@ -7,16 +7,29 @@ const InputContactForm = (props) => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [isSelected, setIsSelected] = useState(false)
+  const [isSelected, setIsSelected] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [isPhoneNumber, setIsPhoneNumber] = useState(false);
+
+  // TODO: Uncomment baris kode di bawah untuk membuat regex yang akan membantu memvalidasi format nomor telepon dan email
+  const regexPhoneNumber = /^[0-9]*$/;
+  const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   // TODO:
-  // 1. Buat metode untuk dispatch fungsi ubah data kontak yang sudah dibuat sebelumnya di service/index.js di dalam fungsi handleSubmit
-  // 2. Pada fungsi handleSubmit, buat percabangan dengan kondisi ketika nilai dari id lebih dari 0, maka jalankan fungsi ubah data kontak dan untuk sebaliknya, maka jalankan fungsi untuk tambah kontak baru
+  // 1. Buat sebuah fungsi yang akan memvalidasi apakah format dari nomor telepon dan email yang dimasukkan sudah benar atau belum
+  // 2. Jika format nomor telepon salah, maka tampilkan sebuah alert dengan isi pesan "Nomor telepon hanya dapat berupa angka."
+  // 3. Jika format email salah, maka tampilkan sebuah alert dengan isi pesan "Format email tidak sesuai."
+  // 4. Jika format nomor telepon dan email sudah benar, maka lanjutkan proses untuk membuat kontak baru atau meng-update kontak
 
   const { handleGetContacts, selectedContact } = props;
 
   const handleSubmit = async () => {
-    console.log(isSelected)
+    if (!isPhoneNumber || !isEmail) {
+      if (!isPhoneNumber) {
+        return alert("No. Telepon harus berupa angka");
+      }
+      return alert("alamat email tidak valid");
+    }
     if (isSelected) {
       await updateContactData(id, {
         full_name: fullName,
@@ -44,7 +57,6 @@ const InputContactForm = (props) => {
 
   const allowSubmit = !(!fullName || !phoneNumber || !email);
 
-  // TODO: Uncomment baris kode di bawah untuk mengisi input field dengan data kontak yang akan diubah ketika value dari selectedContact berubah
   useEffect(() => {
     setId(selectedContact?.id);
     setFullName(selectedContact?.fullName ? selectedContact.fullName : "");
@@ -54,6 +66,11 @@ const InputContactForm = (props) => {
     setEmail(selectedContact?.email ? selectedContact.email : "");
     setIsSelected(selectedContact?.id ? true : false);
   }, [selectedContact]);
+
+  useEffect(() => {
+    setIsPhoneNumber(regexPhoneNumber.test(phoneNumber) ? true : false);
+    setIsEmail(regexEmail.test(email) ? true : false);
+  }, [phoneNumber, email])
 
   return (
     <div className="input-contact__form-container">
