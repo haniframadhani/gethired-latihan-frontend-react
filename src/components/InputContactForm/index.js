@@ -26,9 +26,9 @@ const InputContactForm = (props) => {
   const handleSubmit = async () => {
     if (!isPhoneNumber || !isEmail) {
       if (!isPhoneNumber) {
-        return alert("No. Telepon harus berupa angka");
+        return alert("Tidak dapat menambahkan Contact dengan No.Tlp berupa huruf");
       }
-      return alert("alamat email tidak valid");
+      return alert("Tidak dapat menambahkan Contact dengan Email yang tidak sesuai");
     }
     if (isSelected) {
       await updateContactData(id, {
