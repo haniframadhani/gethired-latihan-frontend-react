@@ -29,6 +29,7 @@ button {
   font-weight: bold;
   background: #198754;
   color: #ffffff;
+  cursor: pointer;
 }
 
 button:disabled {
